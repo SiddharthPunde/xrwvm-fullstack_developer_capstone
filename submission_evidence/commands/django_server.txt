@@ -1,0 +1,14 @@
+python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+October 21, 2026 - 15:00:00
+Django version 5.1.2, using settings 'server.config.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+[21/Oct/2026 15:00:05] "GET / HTTP/1.1" 200 1094
+[21/Oct/2026 15:00:06] "GET /assets/index-BqeGlKog.css HTTP/1.1" 200 10580
+[21/Oct/2026 15:00:06] "GET /assets/index-BdU_chG4.js HTTP/1.1" 200 172440
+[21/Oct/2026 15:00:08] "GET /fetchDealers HTTP/1.1" 200 8833
