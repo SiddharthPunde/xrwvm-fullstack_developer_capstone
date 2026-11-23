@@ -6,3 +6,5 @@ vaderSentiment>=3.3.2
 requests>=2.31.0
 pytest>=8.0.0
 pytest-django>=4.8.0
+gunicorn>=22.0,<24.0
+
