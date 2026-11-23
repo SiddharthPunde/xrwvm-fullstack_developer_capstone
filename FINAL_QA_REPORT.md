@@ -17,8 +17,8 @@ Workflow run: https://github.com/SiddharthPunde/xrwvm-fullstack_developer_capsto
 
 ## Important scope notes
 
-- Dealership records 15–50 are clearly labelled demo records generated for the assignment's 50-record requirement; they are not claims about real businesses.
+- The 50 dealership records come from the official IBM capstone sample dataset in `ibm-developer-skills-network/xrwvm-fullstack_developer_capstone`.
 - The current successful workflow run verifies the code and API in GitHub Actions, not a public deployment.
-- No live deployment URL is currently verified. Do not submit the old CognitiveClass proxy URL copied from another repository.
+- A Render Blueprint is included in `render.yaml`, and the Docker image is built in CI. A live public deployment URL is not yet verified. Do not submit the old CognitiveClass proxy URL copied from another repository.
 - The reviewer previously flagged the Task 20 dealer/review screenshot because the review was not fully visible. Retake it only if you intend to recover that point.
 - Deployed screenshots for Tasks 25–28 must come from the actual live deployment; existing files should not be represented as verified unless checked against that deployment.
