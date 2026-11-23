@@ -1,12 +1,12 @@
 # Repository name
-cars-dealership-capstone
+xrwvm-fullstack_developer_capstone
 
 # Project name
 Best Cars Dealership – Full-Stack Capstone Application
 
 # Cars Dealership Full-Stack Capstone Web Application
 
-- **Repository name:** cars-dealership-capstone
+- **Repository name:** xrwvm-fullstack_developer_capstone
 - **Project name:** Best Cars Dealership – Full-Stack Capstone Application
 - **Author:** Siddharth Punde
 - **Course:** Full Stack Cloud Development Capstone Project
@@ -39,7 +39,7 @@ A comprehensive, production-grade automotive dealership platform built for the *
 ## 📁 Project Directory Structure
 
 ```text
-cars-dealership-capstone/
+xrwvm-fullstack_developer_capstone/
 ├── README.md                           # Master Project Documentation & Quickstart
 ├── .gitignore                          # Git Ignore Rules for Python, Node, & Secrets
 ├── .env.example                        # Environment Configuration Template
@@ -143,7 +143,7 @@ cars-dealership-capstone/
 ### 2. Clone and Setup Environment
 ```bash
 git clone <YOUR_REPOSITORY_URL>
-cd cars-dealership-capstone
+cd xrwvm-fullstack_developer_capstone
 
 # Create Python virtual environment
 python -m venv .venv
