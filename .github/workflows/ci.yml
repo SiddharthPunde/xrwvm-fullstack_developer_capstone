@@ -106,14 +106,14 @@ jobs:
 
           curl --silent --show-error --fail \
             --output /tmp/dealers.json \
-            --write-out "GET /fetchDealers HTTP_STATUS=%{http_code}\\n" \
+            --write-out "GET /fetchDealers HTTP_STATUS=%{http_code}\n" \
             http://127.0.0.1:8000/fetchDealers
 
           python -c "import json; dealers=json.load(open('/tmp/dealers.json')); print('DEALERS_RETURNED='+str(len(dealers))); assert len(dealers)==50, f'Expected 50 dealers, got {len(dealers)}'"
 
           curl --silent --show-error --fail \
             --output /tmp/sentiment.json \
-            --write-out "GET /analyze/Fantastic%%20services HTTP_STATUS=%{http_code}\\n" \
+            --write-out "GET /analyze/Fantastic%20services HTTP_STATUS=%{http_code}\n" \
             http://127.0.0.1:8000/analyze/Fantastic%20services
 
           python -c "import json; result=json.load(open('/tmp/sentiment.json')); print('SENTIMENT_RESPONSE='+json.dumps(result)); assert result['sentiment']=='positive'"
