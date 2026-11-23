@@ -1,6 +1,7 @@
 name: Full-Stack Dealership CI/CD Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches: [main, master]
   pull_request:
@@ -34,8 +35,8 @@ jobs:
           # Exit-zero treats all errors as warnings
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=.venv,venv,node_modules
 
-  lint-js:
-    name: Lint JavaScript Files
+  frontend-build:
+    name: Build React Frontend
     runs-on: ubuntu-latest
 
     steps:
@@ -51,14 +52,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./frontend
-        run: |
-          npm ci || npm install
+        run: npm ci
 
-      - name: Run Linter
+      - name: Build Production Frontend
         working-directory: ./frontend
-        run: |
-          echo "Linting JavaScript/JSX files with linter..."
-          npx eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 || true
+        run: npm run build
 
   backend-tests:
     name: Django Backend Checks & Automated Tests
@@ -91,6 +89,34 @@ jobs:
       - name: Seed Database
         run: |
           python manage.py seed_dealerships
+
+      - name: Verify Assignment API Endpoints
+        run: |
+          set -e
+          python manage.py runserver 127.0.0.1:8000 --noreload > /tmp/dealership-django.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:8000/api/dealers/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl --silent --show-error --fail \
+            --output /tmp/dealers.json \
+            --write-out "GET /fetchDealers HTTP_STATUS=%{http_code}\\n" \
+            http://127.0.0.1:8000/fetchDealers
+
+          python -c "import json; dealers=json.load(open('/tmp/dealers.json')); print('DEALERS_RETURNED='+str(len(dealers))); assert len(dealers)==50, f'Expected 50 dealers, got {len(dealers)}'"
+
+          curl --silent --show-error --fail \
+            --output /tmp/sentiment.json \
+            --write-out "GET /analyze/Fantastic%%20services HTTP_STATUS=%{http_code}\\n" \
+            http://127.0.0.1:8000/analyze/Fantastic%20services
+
+          python -c "import json; result=json.load(open('/tmp/sentiment.json')); print('SENTIMENT_RESPONSE='+json.dumps(result)); assert result['sentiment']=='positive'"
 
       - name: Run Full Backend Test Suite
         run: |
