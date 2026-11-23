@@ -1,6 +1,7 @@
 import json
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from server.dealerships.models import CarMake, Dealer, CarModel
 from server.reviews.models import Review
 
@@ -208,6 +209,14 @@ class FullStackCapstoneTestSuite(TestCase):
         data = res.json()
         self.assertGreaterEqual(len(data), 3)
 
+    def test_seed_command_provides_50_dealers_to_assignment_endpoint(self):
+        call_command("seed_dealerships", verbosity=0)
+        self.assertEqual(Dealer.objects.count(), 50)
+
+        response = self.client.get("/fetchDealers")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 50)
+
     def test_get_dealer_by_id(self):
         res = self.client.get("/api/dealers/1/")
         self.assertEqual(res.status_code, 200)
@@ -308,6 +317,12 @@ class FullStackCapstoneTestSuite(TestCase):
         data = res.json()
         self.assertEqual(data["sentiment"], "positive")
         self.assertGreater(data["score"], 0)
+
+    def test_assignment_sentiment_get_route(self):
+        response = self.client.get("/analyze/Fantastic%20services")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["sentiment"], "positive")
+        self.assertEqual(response.json()["status"], 200)
 
     # 6. Static HTML Deliverables & Admin Tests
     def test_about_page_served(self):
