@@ -36,6 +36,7 @@ urlpatterns = [
     path("fetchDealer/<int:dealer_id>/", DealerDetailView.as_view(), name="fetch-dealer-slash"),
     path("fetchReviews/dealer/<int:dealer_id>", DealerReviewsView.as_view(), name="fetch-dealer-reviews"),
     path("fetchReviews/dealer/<int:dealer_id>/", DealerReviewsView.as_view(), name="fetch-dealer-reviews-slash"),
+    path("analyze/<path:text>", FetchSentimentView.as_view(), name="assignment-sentiment-analysis"),
     path("fetchSentiment/<path:text>", FetchSentimentView.as_view(), name="fetch-sentiment"),
     path("fetchSentiment/<path:text>/", FetchSentimentView.as_view(), name="fetch-sentiment-slash"),
     path("fetchCars", CarMakeListView.as_view(), name="fetch-cars"),
