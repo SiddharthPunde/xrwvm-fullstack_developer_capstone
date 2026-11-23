@@ -110,7 +110,7 @@ jobs:
             http://127.0.0.1:8000/fetchDealers
 
           python -c "import json; dealers=json.load(open('/tmp/dealers.json')); print('DEALERS_RETURNED='+str(len(dealers))); assert len(dealers)==50, f'Expected 50 dealers, got {len(dealers)}'"
-          python -c "import json; dealers=json.load(open('/tmp/dealers.json')); print('DEALER_RECORDS='+json.dumps([{'id':d['id'],'full_name':d['full_name']} for d in dealers], indent=2))"
+          python -c "import json; dealers=json.load(open('/tmp/dealers.json')); print('DEALER_API_RESPONSE='+json.dumps(dealers, indent=2))"
 
           curl --silent --show-error --fail \
             --output /tmp/sentiment.json \
