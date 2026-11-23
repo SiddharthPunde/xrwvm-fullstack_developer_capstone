@@ -6,7 +6,7 @@ FROM node:22-alpine AS frontend-builder
 WORKDIR /app/frontend
 
 COPY frontend/package.json ./
-RUN npm install
+RUN npm ci
 
 COPY frontend/ ./
 RUN npm run build
@@ -18,7 +18,9 @@ FROM python:3.13-slim AS production
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PORT=8000 \
+    DEBUG=False \
+    ALLOWED_HOSTS=*
 
 WORKDIR /app
 
@@ -34,7 +36,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy Backend Source Code
 COPY manage.py .
 COPY server/ server/
-COPY data/ data/
 COPY scripts/ scripts/
 
 # Copy Built Frontend Distribution from Stage 1
@@ -50,4 +51,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn server.config.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
