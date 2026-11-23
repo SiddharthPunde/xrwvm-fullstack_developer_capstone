@@ -19,16 +19,16 @@ Best Cars Dealership – Full-Stack Capstone Application
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A comprehensive, production-grade automotive dealership platform built for the **Full-Stack Development Capstone Project**. The platform enables customers to discover certified dealerships across the United States, filter branches by state (including Kansas), view detailed dealer inventory, read customer feedback, submit verified reviews, and benefit from real-time natural language sentiment analysis.
+A full-stack sample dealership platform built for the **IBM Full Stack Developer Capstone Project**. It uses the official IBM capstone sample dataset of 50 dealerships and lets visitors browse branches, filter by state, view inventory and customer reviews, submit feedback, and see sentiment classifications.
 
 ---
 
 ## 🚀 Key Features
 
-1. **Nationwide Dealership Directory**: Search and filter certified dealerships across multiple US states (Kansas, California, Texas, New York, Florida, Illinois, Washington, Colorado).
+1. **Dealership Directory**: Browse and filter 50 dealerships from the official IBM capstone sample dataset.
 2. **State-Level Filtering**: High-performance backend filtering for states including `Kansas` with case-insensitive query support (`/api/dealers/?state=Kansas`).
 3. **Vehicle Inventory & Makes**: Integration of car manufacturers (Toyota, Ford, Honda, Chevrolet, Tesla, BMW, Audi, Hyundai) and associated models (Sedans, SUVs, Trucks, EVs).
-4. **Verified Customer Reviews**: Secure review submission system with dealer binding, purchase confirmation, and database persistence.
+4. **Customer Reviews**: Authenticated review submission with dealership association and database persistence.
 5. **Deterministic Sentiment Analysis**: Integrated natural language sentiment scoring pipeline evaluating review text (such as `"Fantastic services"` with reproducible positive classification and compound score).
 6. **Authentication & Session Security**: Secure user registration with 5 required fields, Django password hashing, persistent session management, and CSRF protection.
 7. **Administrative Management**: Configured Django Admin portal for managing Dealers, Reviews, Car Makes, and Car Models.

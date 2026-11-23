@@ -1,1 +1,7 @@
-https://sn-labs-ajayanandiyawar-8000.proxy.cognitiveclass.ai/
+Deployment status: NOT YET DEPLOYED
+
+A Render Blueprint is prepared in the repository root (render.yaml), and the Docker image builds successfully in GitHub Actions.
+
+After creating the Blueprint in your Render account and completing the deployment, replace this note with the real public application URL.
+
+Do not submit a placeholder, localhost URL, or the old CognitiveClass proxy URL from another repository.

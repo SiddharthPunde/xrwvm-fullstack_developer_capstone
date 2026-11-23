@@ -64,7 +64,7 @@ class Command(BaseCommand):
             makes_map[item["name"]] = make_obj
         self.stdout.write(self.style.SUCCESS(f"Seeded {len(makes_map)} car makes."))
 
-        # 4. Seed Dealerships (including multiple in Kansas)
+        # 4. Seed the official IBM capstone sample dataset (50 dealerships)
         dealers_data = [
             {
                 "id": 1,
